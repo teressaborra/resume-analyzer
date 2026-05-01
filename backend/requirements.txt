@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+PyPDF2
+scikit-learn
+sentence-transformers
+spacy
+google-genai
+python-dotenv
+python-multipart
+motor
+pymongo

@@ -1,0 +1,28 @@
+.wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .wrap { grid-template-columns: 1fr; } }
+
+.box {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px; padding: 16px;
+}
+
+.heading {
+  font-size: 0.75rem; font-weight: 600; color: #64748b;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.matched {
+  background: rgba(34,197,94,0.08); color: #4ade80;
+  border: 1px solid rgba(34,197,94,0.2);
+  padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 500;
+}
+.missing {
+  background: rgba(239,68,68,0.08); color: #f87171;
+  border: 1px solid rgba(239,68,68,0.2);
+  padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 500;
+}
+.empty { color: #334155; font-size: 0.82rem; }
