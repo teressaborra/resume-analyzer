@@ -3,11 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 import traceback
 
 from resume_parser import extract_text_from_pdf, extract_sections, extract_contact_info
-from matcher import semantic_similarity, extract_skills_spacy, compute_skill_overlap, compute_experience_years
+from matcher import semantic_similarity, compute_skill_overlap, compute_experience_years
+from skills_db import extract_skills_from_text, compute_ats_score
 from ai_analyzer import analyze_with_ai, generate_cover_letter
 from database import save_analysis, get_all_analyses, get_analysis_by_id
 
-app = FastAPI(title="AI Resume Analyzer", version="2.0.0")
+app = FastAPI(title="AI Resume Analyzer", version="3.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -30,20 +31,37 @@ async def analyze(
 
         sections = extract_sections(resume_text)
         contact = extract_contact_info(resume_text)
+
+        # Semantic similarity
         similarity_score = semantic_similarity(resume_text, job_description)
 
-        resume_skills = extract_skills_spacy(sections["skills"] or resume_text)
-        job_skills = extract_skills_spacy(job_description)
+        # Curated skill extraction (fast, accurate)
+        resume_skills = extract_skills_from_text(resume_text)
+        job_skills = extract_skills_from_text(job_description)
         skill_result = compute_skill_overlap(resume_skills, job_skills)
 
+        # ATS simulation
+        ats_result = compute_ats_score(resume_text, job_description)
+
+        # Experience
         years_exp = compute_experience_years(resume_text)
-        overall_score = round((similarity_score * 0.4) + (skill_result["score"] * 0.6), 2)
+
+        # Weighted overall score: semantic 30% + skill 40% + ats 30%
+        overall_score = round(
+            (similarity_score * 0.3) +
+            (skill_result["score"] * 0.4) +
+            (ats_result["ats_score"] * 0.3),
+            2
+        )
+
+        # AI feedback
         ai_feedback = analyze_with_ai(resume_text, job_description, skill_result["missing"])
 
         result = {
             "overall_score": overall_score,
             "semantic_similarity": similarity_score,
             "skill_match": skill_result,
+            "ats": ats_result,
             "years_of_experience": years_exp,
             "contact_info": contact,
             "sections_detected": {k: bool(v) for k, v in sections.items() if k != "full"},
@@ -90,4 +108,4 @@ async def history_detail(analysis_id: str):
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "version": "2.0.0"}
+    return {"status": "ok", "version": "3.0.0"}

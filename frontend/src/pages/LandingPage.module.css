@@ -1,0 +1,107 @@
+.page { flex: 1; }
+
+/* Hero */
+.hero {
+  max-width: 1200px; margin: 0 auto;
+  padding: 64px 32px;
+  display: grid; grid-template-columns: 1fr 480px; gap: 64px; align-items: center;
+}
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding: 40px 20px; gap: 40px; } }
+
+.heroLeft { display: flex; flex-direction: column; gap: 20px; }
+.tag {
+  display: inline-flex; width: fit-content;
+  background: #ede9fe; color: #6d28d9;
+  padding: 5px 14px; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em;
+}
+.heroTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; color: #0f172a;
+}
+.heroAccent { color: #6366f1; }
+.heroDesc { font-size: 1rem; color: #64748b; line-height: 1.7; max-width: 440px; }
+.features { display: flex; flex-wrap: wrap; gap: 8px; }
+.featureChip {
+  background: #f1f5f9; border: 1px solid #e2e8f0;
+  color: #475569; padding: 5px 12px; border-radius: 100px;
+  font-size: 0.8rem; font-weight: 500;
+}
+
+/* Form card */
+.heroRight {}
+.form {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px; padding: 28px;
+  display: flex; flex-direction: column; gap: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.formTitle { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
+.formSub { font-size: 0.82rem; color: #94a3b8; margin-top: -8px; }
+
+.dropzone {
+  border: 2px dashed #e2e8f0; border-radius: 10px;
+  padding: 28px 16px; text-align: center; cursor: pointer;
+  transition: all 0.2s; background: #f8fafc;
+}
+.dropzone:hover, .dropzone.dragOver { border-color: #6366f1; background: #f5f3ff; }
+.dropzone.hasFile { border-color: #22c55e; background: #f0fdf4; border-style: solid; }
+
+.dropContent { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.uploadIcon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: #ede9fe; display: flex; align-items: center; justify-content: center;
+}
+.dropText { font-size: 0.875rem; font-weight: 600; color: #374151; }
+.dropSub { font-size: 0.75rem; color: #9ca3af; }
+
+.fileInfo { display: flex; align-items: center; gap: 12px; }
+.fileEmoji { font-size: 2rem; }
+.fileName { font-size: 0.875rem; font-weight: 600; color: #15803d; }
+.fileChange { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.fieldLabel { font-size: 0.78rem; font-weight: 600; color: #374151; }
+.textarea {
+  border: 1.5px solid #e2e8f0; border-radius: 8px;
+  padding: 10px 12px; font-size: 0.875rem; font-family: inherit;
+  color: #0f172a; resize: vertical; outline: none; transition: border-color 0.2s;
+  background: #fff; line-height: 1.6;
+}
+.textarea::placeholder { color: #cbd5e1; }
+.textarea:focus { border-color: #6366f1; }
+
+.submitBtn {
+  background: #6366f1; color: white; border: none;
+  border-radius: 10px; padding: 14px;
+  font-size: 0.95rem; font-weight: 700; cursor: pointer;
+  transition: all 0.2s; font-family: inherit;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.35);
+}
+.submitBtn:hover:not(:disabled) { background: #4f46e5; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(99,102,241,0.4); }
+.submitBtn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; transform: none; }
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3); border-top-color: white;
+  border-radius: 50%; animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* How it works */
+.howItWorks { background: #fff; border-top: 1px solid #e2e8f0; padding: 56px 32px; }
+.howInner { max-width: 1200px; margin: 0 auto; }
+.howTitle { font-size: 1.5rem; font-weight: 700; color: #0f172a; text-align: center; margin-bottom: 36px; letter-spacing: -0.02em; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 700px) { .steps { grid-template-columns: 1fr; } }
+.step { text-align: center; padding: 24px; }
+.stepNum {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #ede9fe; color: #6366f1;
+  font-size: 1rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+}
+.stepTitle { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+.stepDesc { font-size: 0.875rem; color: #64748b; line-height: 1.6; }

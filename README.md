@@ -7,32 +7,35 @@ A full-stack AI-powered resume analyzer that matches your resume against a job d
 ## Tech Stack
 
 ### Backend
-| Tool | Purpose |
-|------|---------|
-| **Python 3.10+** | Core language |
-| **FastAPI** | REST API framework |
-| **PyPDF2** | Extract text from PDF resumes |
-| **sentence-transformers** | Semantic similarity using `all-MiniLM-L6-v2` embeddings |
-| **spaCy** | NLP-based skill extraction from text |
-| **scikit-learn** | Supporting ML utilities |
-| **Google Gemini API** (`google-genai`) | AI feedback, strengths, tips, cover letter generation |
-| **Motor + PyMongo** | Async MongoDB driver for storing analysis history |
-| **python-dotenv** | Load environment variables from `.env` |
-| **Uvicorn** | ASGI server to run FastAPI |
+
+| Tool                                   | Purpose                                                 |
+| -------------------------------------- | ------------------------------------------------------- |
+| **Python 3.10+**                       | Core language                                           |
+| **FastAPI**                            | REST API framework                                      |
+| **PyPDF2**                             | Extract text from PDF resumes                           |
+| **sentence-transformers**              | Semantic similarity using `all-MiniLM-L6-v2` embeddings |
+| **spaCy**                              | NLP-based skill extraction from text                    |
+| **scikit-learn**                       | Supporting ML utilities                                 |
+| **Google Gemini API** (`google-genai`) | AI feedback, strengths, tips, cover letter generation   |
+| **Motor + PyMongo**                    | Async MongoDB driver for storing analysis history       |
+| **python-dotenv**                      | Load environment variables from `.env`                  |
+| **Uvicorn**                            | ASGI server to run FastAPI                              |
 
 ### Frontend
-| Tool | Purpose |
-|------|---------|
-| **React 19** | UI framework |
-| **Vite** | Frontend build tool and dev server |
-| **Axios** | HTTP requests to the backend API |
-| **react-circular-progressbar** | Score gauge visualizations |
-| **CSS Modules** | Scoped component styling |
+
+| Tool                           | Purpose                            |
+| ------------------------------ | ---------------------------------- |
+| **React 19**                   | UI framework                       |
+| **Vite**                       | Frontend build tool and dev server |
+| **Axios**                      | HTTP requests to the backend API   |
+| **react-circular-progressbar** | Score gauge visualizations         |
+| **CSS Modules**                | Scoped component styling           |
 
 ### Database
-| Tool | Purpose |
-|------|---------|
-| **MongoDB** (local) | Stores all past resume analyses |
+
+| Tool                | Purpose                            |
+| ------------------- | ---------------------------------- |
+| **MongoDB** (local) | Stores all past resume analyses    |
 | **MongoDB Compass** | GUI to view stored data (optional) |
 
 ---
@@ -68,7 +71,9 @@ resume_analyzer/
 ## Setup Instructions
 
 ### Prerequisites
+
 Make sure you have these installed:
+
 - [Python 3.10+](https://www.python.org/downloads/)
 - [Node.js 18+](https://nodejs.org/)
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community) — install and let it run as a Windows service
@@ -92,24 +97,29 @@ cd backend
 ```
 
 **Install Python dependencies:**
+
 ```bash
 pip install -r requirements.txt
 ```
 
 **Download the spaCy language model:**
+
 ```bash
 python -m spacy download en_core_web_sm
 ```
 
 **Create your `.env` file** — create a file called `.env` inside the `backend/` folder:
+
 ```
 GEMINI_API_KEY=your_gemini_api_key_here
 MONGODB_URI=mongodb://localhost:27017
 DB_NAME=resume_analyzer
 ```
+
 Get your free Gemini API key from: https://aistudio.google.com/app/apikey
 
 **Start the backend server:**
+
 ```bash
 uvicorn main:app --reload
 ```
@@ -128,11 +138,13 @@ cd frontend
 ```
 
 **Install Node dependencies:**
+
 ```bash
 npm install
 ```
 
 **Start the frontend dev server:**
+
 ```bash
 npm run dev
 ```
@@ -145,10 +157,13 @@ Frontend runs at: `http://localhost:5173`
 
 On Windows, MongoDB runs as a service automatically after installation.
 To check:
+
 ```bash
 Get-Service -Name MongoDB
 ```
+
 Should show `Running`. If not:
+
 ```bash
 Start-Service -Name MongoDB
 ```
@@ -157,13 +172,13 @@ Start-Service -Name MongoDB
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/analyze` | Upload resume PDF + job description, get full analysis |
-| `POST` | `/cover-letter` | Generate a tailored cover letter |
-| `GET` | `/history` | Get all past analyses |
-| `GET` | `/history/{id}` | Get a specific analysis by ID |
-| `GET` | `/health` | Health check |
+| Method | Endpoint        | Description                                            |
+| ------ | --------------- | ------------------------------------------------------ |
+| `POST` | `/analyze`      | Upload resume PDF + job description, get full analysis |
+| `POST` | `/cover-letter` | Generate a tailored cover letter                       |
+| `GET`  | `/history`      | Get all past analyses                                  |
+| `GET`  | `/history/{id}` | Get a specific analysis by ID                          |
+| `GET`  | `/health`       | Health check                                           |
 
 ---
 

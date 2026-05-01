@@ -1,11 +1,13 @@
 .wrap {
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  padding: 20px 16px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 14px 8px;
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px; flex: 1; min-width: 120px;
-  transition: border-color 0.2s;
+  border-radius: 12px; transition: border-color 0.2s;
 }
 .wrap:hover { border-color: rgba(99,102,241,0.3); }
-.gauge { width: 100px; height: 100px; }
-.label { font-size: 0.78rem; color: #64748b; text-align: center; font-weight: 500; letter-spacing: 0.02em; }
+.gauge { width: 76px; height: 76px; }
+.label {
+  font-size: 0.65rem; color: #475569; text-align: center;
+  font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+}

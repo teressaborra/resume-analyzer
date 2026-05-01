@@ -1,0 +1,31 @@
+.page { flex: 1; background: #f8fafc; padding: 40px 24px; }
+.inner { max-width: 800px; margin: 0 auto; }
+.header { margin-bottom: 28px; }
+.title { font-size: 1.5rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; margin-bottom: 4px; }
+.sub { font-size: 0.875rem; color: #64748b; }
+
+.msg { color: #94a3b8; font-size: 0.875rem; }
+
+.empty { text-align: center; padding: 60px 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; }
+.emptyIcon { font-size: 2.5rem; margin-bottom: 12px; }
+.emptyTitle { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+.emptySub { font-size: 0.875rem; color: #94a3b8; }
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+.item {
+  display: flex; justify-content: space-between; align-items: center;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 16px 20px; cursor: pointer; transition: all 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.item:hover { border-color: #6366f1; box-shadow: 0 2px 12px rgba(99,102,241,0.1); transform: translateY(-1px); }
+
+.itemLeft { display: flex; gap: 14px; align-items: flex-start; }
+.fileIcon { font-size: 1.5rem; flex-shrink: 0; }
+.fileName { font-size: 0.9rem; font-weight: 600; color: #0f172a; margin-bottom: 3px; }
+.jobSnippet { font-size: 0.78rem; color: #94a3b8; margin-bottom: 3px; max-width: 400px; }
+.date { font-size: 0.72rem; color: #cbd5e1; }
+
+.itemRight { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+.score { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; }
+.scoreLabel { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }

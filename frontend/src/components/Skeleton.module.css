@@ -1,0 +1,42 @@
+.card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px; padding: 26px;
+  display: flex; flex-direction: column; gap: 22px;
+}
+
+.bone {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+.header { display: flex; justify-content: space-between; align-items: flex-start; }
+.title { height: 20px; width: 160px; margin-bottom: 8px; }
+.sub { height: 14px; width: 220px; }
+.badge { height: 28px; width: 90px; border-radius: 100px; }
+
+.scores { display: flex; gap: 10px; padding: 18px 0; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.gauge { display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 1; padding: 18px 12px; background: rgba(255,255,255,0.02); border-radius: 14px; }
+.circle { width: 90px; height: 90px; border-radius: 50%; }
+.gaugeLabel { height: 12px; width: 70px; }
+
+.summary { height: 60px; }
+.skillsRow { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.skillBox { height: 100px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.section { height: 120px; }
+
+.loadingMsg {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  color: #475569; font-size: 0.85rem; padding: 8px;
+}
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(99,102,241,0.2);
+  border-top-color: #6366f1;
+  border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

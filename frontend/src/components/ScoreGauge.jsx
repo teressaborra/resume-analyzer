@@ -19,8 +19,8 @@ export default function ScoreGauge({ label, value }) {
           styles={buildStyles({
             textColor: color,
             pathColor: color,
-            trailColor: '#2d3748',
-            textSize: '18px',
+            trailColor: 'rgba(255,255,255,0.06)',
+            textSize: '22px',
           })}
         />
       </div>

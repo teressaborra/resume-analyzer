@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import UploadForm from './components/UploadForm'
-import ResultCard from './components/ResultCard'
-import History from './components/History'
+import LandingPage from './pages/LandingPage'
+import ResultsPage from './pages/ResultsPage'
+import HistoryPage from './pages/HistoryPage'
 import { analyzeResume, getHistoryDetail } from './api'
 import styles from './App.module.css'
 
 export default function App() {
-  const [tab, setTab] = useState('analyze')
+  const [page, setPage] = useState('home') // 'home' | 'results' | 'history'
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
   const [error, setError] = useState('')
@@ -16,6 +16,7 @@ export default function App() {
   const handleAnalyze = async (file, jobDesc) => {
     setLoading(true); setError(''); setResult(null)
     setCurrentFile(file); setCurrentJobDesc(jobDesc)
+    setPage('results')
     try {
       const res = await analyzeResume(file, jobDesc)
       setResult(res.data)
@@ -26,72 +27,43 @@ export default function App() {
   }
 
   const handleHistorySelect = async (id) => {
-    setLoading(true); setError('')
+    setLoading(true); setError(''); setResult(null)
+    setPage('results')
     try {
       const res = await getHistoryDetail(id)
-      setResult(res.data); setTab('analyze')
+      setResult(res.data)
     } catch { setError('Failed to load record.') }
     setLoading(false)
   }
 
   return (
     <div className={styles.app}>
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <span className={styles.logoIcon}>🧠</span>
-          AI Resume Analyzer
+      {/* Navbar */}
+      <header className={styles.nav}>
+        <div className={styles.navInner}>
+          <button className={styles.logo} onClick={() => setPage('home')}>
+            <span className={styles.logoMark}>R</span>
+            ResumeAI
+          </button>
+          <div className={styles.navLinks}>
+            <button className={page === 'home' ? styles.navLinkActive : styles.navLink} onClick={() => setPage('home')}>Analyzer</button>
+            <button className={page === 'history' ? styles.navLinkActive : styles.navLink} onClick={() => setPage('history')}>History</button>
+          </div>
         </div>
-        <nav className={styles.nav}>
-          <button className={tab === 'analyze' ? styles.active : ''} onClick={() => setTab('analyze')}>Analyze</button>
-          <button className={tab === 'history' ? styles.active : ''} onClick={() => setTab('history')}>History</button>
-        </nav>
       </header>
 
-      <main className={styles.main}>
-        {tab === 'analyze' && (
-          <>
-            <div className={styles.hero}>
-              <div className={styles.badge}>
-                <span className={styles.badgeDot} />
-                Powered by Gemini AI + NLP
-              </div>
-              <h1 className={styles.heroTitle}>
-                Match your resume to<br /><span>any job in seconds</span>
-              </h1>
-              <p className={styles.heroSub}>
-                Upload your PDF resume and paste a job description. Get AI-powered match scores, skill gap analysis, and personalized improvement tips.
-              </p>
-            </div>
-
-            <div className={styles.layout}>
-              <div className={styles.left}>
-                <UploadForm onSubmit={handleAnalyze} loading={loading} />
-                {error && <div className={styles.error}>⚠️ {error}</div>}
-              </div>
-              <div className={styles.right}>
-                {result
-                  ? <ResultCard result={result} file={currentFile} jobDesc={currentJobDesc} />
-                  : (
-                    <div className={styles.placeholder}>
-                      <span className={styles.placeholderIcon}>📊</span>
-                      <p>Your analysis will appear here</p>
-                      <span className={styles.placeholderHint}>Upload a resume and job description to get started</span>
-                    </div>
-                  )
-                }
-              </div>
-            </div>
-          </>
-        )}
-
-        {tab === 'history' && (
-          <div className={styles.historyPage}>
-            <h2 className={styles.pageTitle}>Past Analyses</h2>
-            <p className={styles.pageSubtitle}>Click any record to view the full analysis</p>
-            <History onSelect={handleHistorySelect} />
-          </div>
-        )}
-      </main>
+      {page === 'home' && <LandingPage onSubmit={handleAnalyze} />}
+      {page === 'results' && (
+        <ResultsPage
+          result={result}
+          loading={loading}
+          error={error}
+          file={currentFile}
+          jobDesc={currentJobDesc}
+          onBack={() => setPage('home')}
+        />
+      )}
+      {page === 'history' && <HistoryPage onSelect={handleHistorySelect} />}
     </div>
   )
 }
